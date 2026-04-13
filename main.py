@@ -93,3 +93,37 @@ cv2.destroyAllWindows()
 def is_valid_advice(sentence):
     sentence = sentence.lower()
     return "should" in sentence
+if direction and not answer_selected:
+    answer_selected = True
+
+    chosen_answer = q[direction]
+
+    # Check grammar first
+    if not is_valid_advice(chosen_answer):
+        print("Invalid answer format!")
+    else:
+        if direction == q["answer"]:
+            score += 1
+            print("Correct advice!")
+        else:
+            print("Wrong advice!")
+
+    current_q += 1
+    cv2.putText(frame, "Use: SHOULD / SHOULDN'T",
+            (50, 300),
+            cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
+    feedback = ""
+
+if direction == q["answer"]:
+    feedback = "Good! Correct advice."
+else:
+    feedback = "Try again! Think carefully."
+
+cv2.putText(frame, feedback, (50, 350),
+            cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 0), 2)
+{
+    "question": "You have a headache.",
+    "left": "You should rest.",
+    "right": "You should play football.",
+    "answer": "left"
+}
